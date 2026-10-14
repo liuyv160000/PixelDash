@@ -1,0 +1,48 @@
+# Unity 自动生成目录（不提交，占 1.7 GB）
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+
+# Unity/VS 自动生成的工程文件
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# 构建产物 / 崩溃报告
+sysinfo.txt
+*.apk
+*.aab
+*.unitypackage
+*.app
+
+# IDE / 系统
+.vs/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Unity Version Control（Plastic SCM）工作区 —— 不进 git
+/.plastic/
+ignore.conf
+
+# ===== 隐私材料：绝对不要进公开仓库 =====
+# 面试说辞/ 含简历（手机号、邮箱）、CSP 成绩单（身份证号）、竞赛证书、备战清单
+面试说辞/
