@@ -6,14 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/EditingScene.unity
+    guid: 2e9de85f0dd509d41824899c545f3bbe
+  - enabled: 1
     path: Assets/Scenes/VictoryScene.unity
     guid: cab9e2ec7e4426840b422468b6ac4028
   - enabled: 1
     path: Assets/Scenes/FailScene.unity
-    guid: b40aef4587f6eff4a85ece81bdb3f6b9
-  - enabled: 1
-    path: Assets/Scenes/EditingScene.unity
-    guid: 2e9de85f0dd509d41824899c545f3bbe
+    guid: b4207a63b76702547ac90b145a761fb0
   - enabled: 1
     path: Assets/Scenes/EXChoosingScene.unity
     guid: 6dcd2c01a32da5d43ba061d9a1d4228d
