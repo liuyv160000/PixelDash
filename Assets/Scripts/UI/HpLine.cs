@@ -57,7 +57,11 @@ namespace PixelDash.UI
         // Awake 一定先于 OnEnable，所以这里 fill / playerNode 都已就绪
         private void OnEnable()
         {
-            GameEventBus.Instance.Player.On(GameEventBus.PlayerEvent.HURT, OnPlayerHealthChanged);
+            // HURT：强类型订阅（int）—— T 是值类型，走泛型实例化，不装箱
+            GameEventBus.Instance.Player.On<int>(GameEventBus.PlayerEvent.HURT, OnPlayerHurt);
+
+            // DEAD：无 payload 事件，这里仍用旧签名 —— 该事件的其他订阅者（PlayerAudioManager）
+            // 也是 Action<object>，同一事件的订阅签名必须统一，否则会被总线拒绝
             GameEventBus.Instance.Player.On(GameEventBus.PlayerEvent.DEAD, OnPlayerHealthChanged);
 
             Refresh();   // 立刻同步一次，避免开局显示满格（或残留 Inspector 值）
@@ -65,11 +69,17 @@ namespace PixelDash.UI
 
         private void OnDisable()
         {
-            GameEventBus.Instance.Player.Off(GameEventBus.PlayerEvent.HURT, OnPlayerHealthChanged);
+            GameEventBus.Instance.Player.Off<int>(GameEventBus.PlayerEvent.HURT, OnPlayerHurt);
             GameEventBus.Instance.Player.Off(GameEventBus.PlayerEvent.DEAD, OnPlayerHealthChanged);
         }
 
-        /// <summary>事件回调（参数是受伤值，这里不关心，直接按当前血量重绘）。</summary>
+        /// <summary>受伤回调（强类型）：拿到的是本次受伤值，需要时可直接使用；当前仍按当前血量重绘。</summary>
+        private void OnPlayerHurt(int damage)
+        {
+            Refresh();
+        }
+
+        /// <summary>死亡回调（旧签名：该事件无 payload，参数不关心）。</summary>
         private void OnPlayerHealthChanged(object data)
         {
             Refresh();

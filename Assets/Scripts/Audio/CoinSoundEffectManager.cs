@@ -1,3 +1,4 @@
+using UnityEngine;
 using PixelDash.Core;
 
 namespace PixelDash.Audio
@@ -7,14 +8,15 @@ namespace PixelDash.Audio
     {
         private void OnEnable()
         {
-            GameEventBus.Instance.Collection.On(GameEventBus.CollectionEvent.COIN_COLLECTED, OnCollected);
+            // 强类型订阅（GameObject）：引用类型 payload，零装箱；发布方 NormalCoin 用 Emit(..., gameObject) 自动推断为 Emit<GameObject>
+            GameEventBus.Instance.Collection.On<GameObject>(GameEventBus.CollectionEvent.COIN_COLLECTED, OnCollected);
         }
 
         private void OnDisable()
         {
-            GameEventBus.Instance.Collection.Off(GameEventBus.CollectionEvent.COIN_COLLECTED, OnCollected);
+            GameEventBus.Instance.Collection.Off<GameObject>(GameEventBus.CollectionEvent.COIN_COLLECTED, OnCollected);
         }
 
-        private void OnCollected(object _) => PlaySfx("coin_collect");
+        private void OnCollected(GameObject coin) => PlaySfx("coin_collect");
     }
 }
