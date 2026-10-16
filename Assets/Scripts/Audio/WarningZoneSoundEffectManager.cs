@@ -1,3 +1,4 @@
+using UnityEngine;
 using PixelDash.Core;
 
 namespace PixelDash.Audio
@@ -7,14 +8,14 @@ namespace PixelDash.Audio
     {
         private void OnEnable()
         {
-            GameEventBus.Instance.Enemy.On(GameEventBus.EnemyEvent.WARNING_ZONE_ENTER, OnEnter);
+            GameEventBus.Instance.Enemy.On<float>(GameEventBus.EnemyEvent.WARNING_ZONE_ENTER, OnEnter);
         }
 
         private void OnDisable()
         {
-            GameEventBus.Instance.Enemy.Off(GameEventBus.EnemyEvent.WARNING_ZONE_ENTER, OnEnter);
+            GameEventBus.Instance.Enemy.Off<float>(GameEventBus.EnemyEvent.WARNING_ZONE_ENTER, OnEnter);
         }
 
-        private void OnEnter(object _) => PlaySfx("warning_zone_enter");
+        private void OnEnter(float duration) => PlaySfx("warning_zone_enter");
     }
 }

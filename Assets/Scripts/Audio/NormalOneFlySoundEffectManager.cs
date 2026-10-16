@@ -1,3 +1,4 @@
+using UnityEngine;
 using PixelDash.Core;
 
 namespace PixelDash.Audio
@@ -8,18 +9,18 @@ namespace PixelDash.Audio
         private void OnEnable()
         {
             var bus = GameEventBus.Instance.Enemy;
-            bus.On(GameEventBus.EnemyEvent.NORMAL_ONE_FLY_ATTACK, OnAttack);
-            bus.On(GameEventBus.EnemyEvent.NORMAL_ONE_FLY_DEAD, OnDead);
+            bus.On<GameObject>(GameEventBus.EnemyEvent.NORMAL_ONE_FLY_ATTACK, OnAttack);
+            bus.On<GameObject>(GameEventBus.EnemyEvent.NORMAL_ONE_FLY_DEAD, OnDead);
         }
 
         private void OnDisable()
         {
             var bus = GameEventBus.Instance.Enemy;
-            bus.Off(GameEventBus.EnemyEvent.NORMAL_ONE_FLY_ATTACK, OnAttack);
-            bus.Off(GameEventBus.EnemyEvent.NORMAL_ONE_FLY_DEAD, OnDead);
+            bus.Off<GameObject>(GameEventBus.EnemyEvent.NORMAL_ONE_FLY_ATTACK, OnAttack);
+            bus.Off<GameObject>(GameEventBus.EnemyEvent.NORMAL_ONE_FLY_DEAD, OnDead);
         }
 
-        private void OnAttack(object _) => PlaySfx("normal_one_fly_attack");
-        private void OnDead(object _) => PlaySfx("normal_one_fly_dead");
+        private void OnAttack(GameObject _) => PlaySfx("normal_one_fly_attack");
+        private void OnDead(GameObject _) => PlaySfx("normal_one_fly_dead");
     }
 }

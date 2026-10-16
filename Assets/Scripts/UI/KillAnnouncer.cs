@@ -52,15 +52,15 @@ namespace PixelDash.UI
 
         private void OnEnable()
         {
-            GameEventBus.Instance.Enemy.On(GameEventBus.EnemyEvent.ENEMY_KILLED, OnEnemyKilled);
+            GameEventBus.Instance.Enemy.On<GameObject>(GameEventBus.EnemyEvent.ENEMY_KILLED, OnEnemyKilled);
         }
 
         private void OnDisable()
         {
-            GameEventBus.Instance.Enemy.Off(GameEventBus.EnemyEvent.ENEMY_KILLED, OnEnemyKilled);
+            GameEventBus.Instance.Enemy.Off<GameObject>(GameEventBus.EnemyEvent.ENEMY_KILLED, OnEnemyKilled);
         }
 
-        private void OnEnemyKilled(object data)
+        private void OnEnemyKilled(GameObject enemy)
         {
             _killCount++;
             Show(_killCount);

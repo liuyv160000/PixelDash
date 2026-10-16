@@ -195,5 +195,12 @@ namespace PixelDash.Core
             public const string COIN_COLLECTED = "COIN_COLLECTED";
             public const string BULLET_POWERUP_COLLECTED = "BULLET_POWERUP_COLLECTED";
         }
+
+        /// <summary>其它：跨系统杂项事件。</summary>
+        public static class OtherEvent
+        {
+            /// <summary>一局结束（当前无订阅者，保留给后续表现层用）。</summary>
+            public const string GAME_END = "GAME_END";
+        }
     }
 }

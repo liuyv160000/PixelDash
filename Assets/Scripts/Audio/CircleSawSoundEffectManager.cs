@@ -1,3 +1,4 @@
+using UnityEngine;
 using PixelDash.Core;
 
 namespace PixelDash.Audio
@@ -11,14 +12,14 @@ namespace PixelDash.Audio
     {
         private void OnEnable()
         {
-            GameEventBus.Instance.Enemy.On(GameEventBus.EnemyEvent.CIRCLE_SAW_HIT, OnHit);
+            GameEventBus.Instance.Enemy.On<GameObject>(GameEventBus.EnemyEvent.CIRCLE_SAW_HIT, OnHit);
         }
 
         private void OnDisable()
         {
-            GameEventBus.Instance.Enemy.Off(GameEventBus.EnemyEvent.CIRCLE_SAW_HIT, OnHit);
+            GameEventBus.Instance.Enemy.Off<GameObject>(GameEventBus.EnemyEvent.CIRCLE_SAW_HIT, OnHit);
         }
 
-        private void OnHit(object _) => PlaySfx("circle_saw_hit");
+        private void OnHit(GameObject _) => PlaySfx("circle_saw_hit");
     }
 }

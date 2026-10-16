@@ -62,7 +62,7 @@ namespace PixelDash.UI
 
             // DEAD：无 payload 事件，这里仍用旧签名 —— 该事件的其他订阅者（PlayerAudioManager）
             // 也是 Action<object>，同一事件的订阅签名必须统一，否则会被总线拒绝
-            GameEventBus.Instance.Player.On(GameEventBus.PlayerEvent.DEAD, OnPlayerHealthChanged);
+            GameEventBus.Instance.Player.On(GameEventBus.PlayerEvent.DEAD, OnPlayerDead);
 
             Refresh();   // 立刻同步一次，避免开局显示满格（或残留 Inspector 值）
         }
@@ -70,7 +70,7 @@ namespace PixelDash.UI
         private void OnDisable()
         {
             GameEventBus.Instance.Player.Off<int>(GameEventBus.PlayerEvent.HURT, OnPlayerHurt);
-            GameEventBus.Instance.Player.Off(GameEventBus.PlayerEvent.DEAD, OnPlayerHealthChanged);
+            GameEventBus.Instance.Player.Off(GameEventBus.PlayerEvent.DEAD, OnPlayerDead);
         }
 
         /// <summary>受伤回调（强类型）：拿到的是本次受伤值，需要时可直接使用；当前仍按当前血量重绘。</summary>
@@ -79,8 +79,8 @@ namespace PixelDash.UI
             Refresh();
         }
 
-        /// <summary>死亡回调（旧签名：该事件无 payload，参数不关心）。</summary>
-        private void OnPlayerHealthChanged(object data)
+        /// <summary>死亡回调（无 payload 事件 → 无参订阅）。</summary>
+        private void OnPlayerDead()
         {
             Refresh();
         }

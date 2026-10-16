@@ -1,3 +1,4 @@
+using UnityEngine;
 using PixelDash.Core;
 
 namespace PixelDash.Audio
@@ -7,14 +8,14 @@ namespace PixelDash.Audio
     {
         private void OnEnable()
         {
-            GameEventBus.Instance.Collection.On(GameEventBus.CollectionEvent.BULLET_POWERUP_COLLECTED, OnCollected);
+            GameEventBus.Instance.Collection.On<GameObject>(GameEventBus.CollectionEvent.BULLET_POWERUP_COLLECTED, OnCollected);
         }
 
         private void OnDisable()
         {
-            GameEventBus.Instance.Collection.Off(GameEventBus.CollectionEvent.BULLET_POWERUP_COLLECTED, OnCollected);
+            GameEventBus.Instance.Collection.Off<GameObject>(GameEventBus.CollectionEvent.BULLET_POWERUP_COLLECTED, OnCollected);
         }
 
-        private void OnCollected(object _) => PlaySfx("bullet_powerup_collect");
+        private void OnCollected(GameObject _) => PlaySfx("bullet_powerup_collect");
     }
 }

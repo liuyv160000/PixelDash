@@ -42,15 +42,15 @@ namespace PixelDash.UI
 
         private void OnEnable()
         {
-            GameEventBus.Instance.Collection.On(GameEventBus.CollectionEvent.BULLET_POWERUP_COLLECTED, OnPowerup);
+            GameEventBus.Instance.Collection.On<GameObject>(GameEventBus.CollectionEvent.BULLET_POWERUP_COLLECTED, OnPowerup);
         }
 
         private void OnDisable()
         {
-            GameEventBus.Instance.Collection.Off(GameEventBus.CollectionEvent.BULLET_POWERUP_COLLECTED, OnPowerup);
+            GameEventBus.Instance.Collection.Off<GameObject>(GameEventBus.CollectionEvent.BULLET_POWERUP_COLLECTED, OnPowerup);
         }
 
-        private void OnPowerup(object data)
+        private void OnPowerup(GameObject orb)
         {
             Show();
         }

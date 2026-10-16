@@ -1,3 +1,4 @@
+using UnityEngine;
 using PixelDash.Core;
 
 namespace PixelDash.Audio
@@ -7,14 +8,14 @@ namespace PixelDash.Audio
     {
         private void OnEnable()
         {
-            GameEventBus.Instance.Enemy.On(GameEventBus.EnemyEvent.MISSILE_BOOM, OnBoom);
+            GameEventBus.Instance.Enemy.On<GameObject>(GameEventBus.EnemyEvent.MISSILE_BOOM, OnBoom);
         }
 
         private void OnDisable()
         {
-            GameEventBus.Instance.Enemy.Off(GameEventBus.EnemyEvent.MISSILE_BOOM, OnBoom);
+            GameEventBus.Instance.Enemy.Off<GameObject>(GameEventBus.EnemyEvent.MISSILE_BOOM, OnBoom);
         }
 
-        private void OnBoom(object _) => PlaySfx("missile_boom");
+        private void OnBoom(GameObject _) => PlaySfx("missile_boom");
     }
 }

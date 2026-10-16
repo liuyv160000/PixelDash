@@ -1,3 +1,4 @@
+using UnityEngine;
 using PixelDash.Core;
 
 namespace PixelDash.Audio
@@ -15,7 +16,7 @@ namespace PixelDash.Audio
             var bus = GameEventBus.Instance.Player;
             bus.On(GameEventBus.PlayerEvent.JUMP, OnJump);
             bus.On(GameEventBus.PlayerEvent.LAND, OnLand);
-            bus.On(GameEventBus.PlayerEvent.FIRE, OnFire);
+            bus.On<GameObject>(GameEventBus.PlayerEvent.FIRE, OnFire);
             bus.On(GameEventBus.PlayerEvent.HURT_SFX, OnHurt);
             bus.On(GameEventBus.PlayerEvent.DEAD, OnDead);
         }
@@ -25,15 +26,15 @@ namespace PixelDash.Audio
             var bus = GameEventBus.Instance.Player;
             bus.Off(GameEventBus.PlayerEvent.JUMP, OnJump);
             bus.Off(GameEventBus.PlayerEvent.LAND, OnLand);
-            bus.Off(GameEventBus.PlayerEvent.FIRE, OnFire);
+            bus.Off<GameObject>(GameEventBus.PlayerEvent.FIRE, OnFire);
             bus.Off(GameEventBus.PlayerEvent.HURT_SFX, OnHurt);
             bus.Off(GameEventBus.PlayerEvent.DEAD, OnDead);
         }
 
-        private void OnJump(object _) => PlaySfx("player_jump");
-        private void OnLand(object _) => PlaySfx("player_land");
-        private void OnFire(object _) => PlaySfx("player_fire");
-        private void OnHurt(object _) => PlaySfx("player_hurt");
-        private void OnDead(object _) => PlaySfx("player_dead");
+        private void OnJump() => PlaySfx("player_jump");
+        private void OnLand() => PlaySfx("player_land");
+        private void OnFire(GameObject bullet) => PlaySfx("player_fire");
+        private void OnHurt() => PlaySfx("player_hurt");
+        private void OnDead() => PlaySfx("player_dead");
     }
 }

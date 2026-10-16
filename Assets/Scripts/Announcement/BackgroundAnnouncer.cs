@@ -75,13 +75,13 @@ namespace PixelDash.Announcement
         private void OnEnable()
         {
             if (!triggerOnSkillOrb) return;
-            GameEventBus.Instance.Collection.On(
+            GameEventBus.Instance.Collection.On<GameObject>(
                 GameEventBus.CollectionEvent.BULLET_POWERUP_COLLECTED, OnSkillOrbCollected);
         }
 
         private void OnDisable()
         {
-            GameEventBus.Instance.Collection.Off(
+            GameEventBus.Instance.Collection.Off<GameObject>(
                 GameEventBus.CollectionEvent.BULLET_POWERUP_COLLECTED, OnSkillOrbCollected);
         }
 
@@ -97,12 +97,11 @@ namespace PixelDash.Announcement
         /// 因此可以直接读它的 <see cref="BulletSkillOrb.TriggersAnnouncement"/> ——
         /// **只有勾了"触发播报"的球才会播放**，普通技能球静默通过。
         /// </summary>
-        private void OnSkillOrbCollected(object data)
+        private void OnSkillOrbCollected(GameObject go)
         {
-            var go = data as GameObject;
             if (go == null)
             {
-                Debug.LogWarning("[BackgroundAnnouncer] 事件数据不是 GameObject，无法判断是否播报。", this);
+                Debug.LogWarning("[BackgroundAnnouncer] 事件数据为空，无法判断是否播报。", this);
                 return;
             }
 

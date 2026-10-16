@@ -279,7 +279,7 @@ namespace PixelDash.Player
 
         private void EndOutCompleted()
         {
-            GameEventBus.Instance.Other.Emit("GAME_END");
+            GameEventBus.Instance.Other.Emit(GameEventBus.OtherEvent.GAME_END);
             Destroy(gameObject);
         }
 
